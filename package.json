@@ -2,25 +2,42 @@
   "name": "hackreactor-groceries",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "react-dev": "webpack -d --watch",
     "start": "nodemon server/index.js"
   },
-  "author": "Beth Johnson",
+  "author": "Eric Lau",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.23.0",
-    "webpack": "^2.2.1"
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.9.2",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.7.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "cors": "2.8.5",
+    "emotion-theming": "^10.0.27",
     "express": "^4.15.0",
-    "mysql": "^2.16.0",
+    "formik": "^2.1.4",
+    "morgan": "1.10.0",
+    "nodemon": "^2.0.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "sqlite3": "^4.0.6"
+    "react-redux": "7.2.0",
+    "redux": "4.0.5",
+    "redux-devtools": "3.5.0",
+    "redux-thunk": "2.3.0",
+    "styled-components": "^5.1.0",
+    "thunk": "0.0.1",
+    "yup": "^0.28.4"
   }
 }
