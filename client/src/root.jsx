@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider, CSSReset } from '@chakra-ui/core';
 
 // Components
-import App from './components/App';
+import App from './components/App.jsx';
 
 ReactDOM.render(
   <ThemeProvider>

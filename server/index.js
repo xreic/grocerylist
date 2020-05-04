@@ -16,4 +16,4 @@ server.use(cors());
 server.use(morgan('dev'));
 server.use(express.static(path.join(__dirname, '../client/dist')));
 
-server.listen(port, () => console.log('here'));
+server.listen(port, () => console.log(`Here: ${port}`));
