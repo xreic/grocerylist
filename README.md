@@ -1,5 +1,7 @@
 # Grocery List ver. Redux
 
+> Revisiting exercise to solidify Redux understanding
+
 ## Table of Contents
 
 1. [Usage](#Usage)
