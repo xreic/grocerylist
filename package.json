@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react": "webpack -d --watch",
     "start": "nodemon server/index.js"
   },
   "author": "Eric Lau",
@@ -25,6 +25,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
     "cors": "2.8.5",
     "emotion-theming": "^10.0.27",
     "express": "^4.15.0",
