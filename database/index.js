@@ -4,10 +4,10 @@ const pool = new Pool({
   host: 'localhost',
   user: 'postgres',
   password: 'postgres',
-  database: 'gList',
+  database: 'postgres',
   port: 5432
 });
 
 module.exports = {
-  query: (text, params) => pool.query(text, params)
+  query: (query) => pool.query(query)
 };

@@ -5,7 +5,8 @@
   "main": "",
   "scripts": {
     "react": "webpack -d --watch",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "db-init": "node database/init.js"
   },
   "author": "Eric Lau",
   "license": "ISC",
