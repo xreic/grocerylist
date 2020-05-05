@@ -21,14 +21,14 @@ const pool = new Pool({
         id SERIAL PRIMARY KEY,
         uuid TEXT,
         item TEXT,
-        quantity INTEGER);
+        quantity INTEGER,
+        status BOOLEAN);
     `);
     console.log('Created table.');
+
+    await client.end();
+    console.log('Session closed.');
   } catch (error) {
     console.log('Error');
-  } finally {
-    console.log('Pool attempting to drain.');
-    await pool.end();
-    console.log('Pool has drained.');
   }
 })();

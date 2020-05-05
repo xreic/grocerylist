@@ -4,6 +4,12 @@ const items = (state = [], action) => {
       return [...state, action.payload];
     case 'GET_ITEMS':
       return action.payload;
+    case 'SET_ITEM':
+      return state.map((item) => {
+        if (item.uuid === action.payload.uuid)
+          return { ...item, status: action.payload.status };
+        return item;
+      });
     default:
       return state;
   }

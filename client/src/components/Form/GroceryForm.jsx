@@ -27,10 +27,14 @@ const GroceryForm = (props) => {
         const { item, quantity } = data;
         const uuid = uuidv4();
 
-        props.addItem({ uuid, item, quantity });
-
         try {
-          await axios.post('/groceries', { uuid, item, quantity });
+          await axios.post('/groceries', {
+            uuid,
+            item,
+            quantity,
+            status: false
+          });
+          props.addItem({ uuid, item, quantity, status: false });
         } catch (error) {
           console.error('GroceryForm - Error');
           console.error(error);

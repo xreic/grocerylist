@@ -9,9 +9,7 @@ import { ThemeProvider, CSSReset } from '@chakra-ui/core';
 import App from './components/App';
 
 // Tests
-import getItems from './actions/getItems.js';
 window.store = store;
-window.getItems = getItems;
 
 ReactDOM.render(
   <ThemeProvider>

@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 
 // Reducers
 import items from '../reducers/items';
+import filter from '../reducers/filter';
 
 const rootReducer = combineReducers({
-  items
+  items,
+  filter
 });
 
 const store = createStore(

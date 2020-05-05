@@ -1,24 +1,33 @@
 // Dependencies
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Components
 import Item from './Item';
 
 // Redux
 import getItems from '../../actions/getItems';
+import setItem from '../../actions/setItem';
+
 const mapStateToProps = (state) => {
   return { items: state.items };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getItems: () => dispatch(getItems())
+  getItems: () => dispatch(getItems()),
+  setItem: (payload) => dispatch(setItem(payload))
 });
 
 class Items extends Component {
   componentDidMount() {
     this.props.getItems();
   }
+
+  handleClick = async (uuid, status) => {
+    await axios.put('/groceries', { uuid, status: !status });
+    this.props.setItem({ uuid, status: !status });
+  };
 
   render() {
     if (this.props.items === 0) return null;
@@ -30,6 +39,8 @@ class Items extends Component {
             uuid={item.uuid}
             item={item.item}
             quantity={item.quantity}
+            status={item.status}
+            handleClick={this.handleClick}
           />
         ))}
       </React.Fragment>

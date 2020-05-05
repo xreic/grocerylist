@@ -4,13 +4,12 @@ import React from 'react';
 // ChakraUI
 import { SimpleGrid, Text } from '@chakra-ui/core';
 
-const Item = ({ uuid, item, quantity }) => {
+const Item = ({ uuid, item, quantity, status, handleClick }) => {
   return (
     <SimpleGrid
       columns="2"
-      onClick={() => {
-        console.log(`${item} clicked.`, uuid);
-      }}
+      onClick={() => handleClick(uuid, status)}
+      as={status ? 's' : null}
     >
       <Text>{item}</Text>
       <Text>{quantity}</Text>
