@@ -1,7 +1,13 @@
 // Dependencies
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/rootReducer.js';
+
+// Reducers
+import items from '../reducers/items';
+
+const rootReducer = combineReducers({
+  items
+});
 
 const store = createStore(
   rootReducer,
