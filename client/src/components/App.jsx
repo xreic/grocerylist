@@ -3,19 +3,10 @@ import React, { Component } from 'react';
 
 // Styled-Components + ChakraUI
 import styled from 'styled-components';
-import {
-  Box,
-  Image,
-  Heading,
-  Input,
-  Button,
-  List,
-  ListItem,
-  Stack
-} from '@chakra-ui/core';
+import { Box, Image, Heading, List, ListItem, Stack } from '@chakra-ui/core';
 
-// Formik
-import { Formik, Form, Field } from 'formik';
+// Components
+import GroceryForm from './Form/GroceryForm';
 
 class App extends Component {
   constructor(props) {
@@ -29,35 +20,12 @@ class App extends Component {
       <HTMLBody>
         <BodyWrapper>
           <Image src="grocery-bags.png" display="inline" />
+
           <Stack spacing="1rem">
-            <StyledHeading>Grocery List</StyledHeading>
+            <Heading>Grocery List</Heading>
 
             <Box>
-              <Formik
-                initialValues={{ item: '', quantity: '' }}
-                onSubmit={(data, { resetForm }) => {
-                  console.log(`Formik Data:`, data);
-                  resetForm();
-                }}
-              >
-                {({ values }) => (
-                  <Form>
-                    <Field
-                      as={Input}
-                      placeholder="Item"
-                      name="item"
-                      value={values.item}
-                    />
-                    <Field
-                      as={Input}
-                      placeholder="Quantity"
-                      name="quantity"
-                      value={values.quantity}
-                    />
-                    <Button type="submit">Add Grocery</Button>
-                  </Form>
-                )}
-              </Formik>
+              <GroceryForm />
             </Box>
 
             <List styleType="disc">
@@ -108,8 +76,4 @@ const BodyWrapper = styled(Box)`
   width: 50%;
   margin: auto;
   text-align: center;
-`;
-
-const StyledHeading = styled(Heading)`
-  padding-bottom: 1rem;
 `;
