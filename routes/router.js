@@ -4,7 +4,7 @@ const router = express.Router();
 
 const controllers = require('./controllers');
 
-router.get('/', controllers.get);
+router.post('/', controllers.post);
 // router.post('/', controller.post);
 // router.delete('/', controller.deleteAll);
 
