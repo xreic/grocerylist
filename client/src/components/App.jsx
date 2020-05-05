@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { Box, Image, Heading, Stack } from '@chakra-ui/core';
 
 // Components
-import GroceryForm from './Form/GroceryForm';
+import ConnectedForm from './Form/GroceryForm';
 import GroceryList from './GroceryList/GroceryList';
+
+// Containers
 
 const App = () => (
   <HTMLBody>
@@ -18,7 +20,7 @@ const App = () => (
         <Heading>Grocery List</Heading>
 
         <Box>
-          <GroceryForm />
+          <ConnectedForm />
         </Box>
 
         <Box>

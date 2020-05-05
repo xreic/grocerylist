@@ -1,25 +1,33 @@
 // Dependencies
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 // Components
 import Item from './Item';
 
-class Items extends Component {
-  state = {};
+// Redux
+import getItems from '../../actions/getItems';
+const mapStateToProps = (state) => {
+  return { items: state.items };
+};
 
-  componentDidMount = async () => {
-    let { data } = await axios.get('/groceries/');
-    this.setState({ items: data });
-  };
+const mapDispatchToProps = (dispatch) => ({
+  getItems: () => dispatch(getItems())
+});
+
+class Items extends Component {
+  componentDidMount() {
+    this.props.getItems();
+  }
 
   render() {
-    if (this.state.items === undefined) {
+    if (this.props.items === 0) {
       return null;
     }
+    console.log(this.props.items);
     return (
       <React.Fragment>
-        {this.state.items.map((item) => (
+        {this.props.items.map((item) => (
           <Item
             key={item.uuid}
             uuid={item.uuid}
@@ -31,5 +39,6 @@ class Items extends Component {
     );
   }
 }
+const ConnectedItems = connect(mapStateToProps, mapDispatchToProps)(Items);
 
-export default Items;
+export default ConnectedItems;

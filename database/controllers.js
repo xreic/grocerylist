@@ -1,6 +1,5 @@
 //Dependencies
-const { v4: uuidv4 } = require('uuid');
-const { query } = require('../database/index');
+const { query } = require('./index');
 
 module.exports = {
   get: async (req, res) => {
@@ -20,18 +19,16 @@ module.exports = {
   },
 
   post: async (req, res) => {
+    const { uuid, item, quantity } = req.body;
     const queryString = {
       text: 'INSERT INTO gList (uuid, item, quantity) VALUES ($1, $2, $3)',
-      values: [uuidv4(), req.body.item, req.body.quantity]
+      values: [uuid, item, quantity]
     };
 
     try {
       await query(queryString);
 
-      res
-        .status(200)
-        .send({ item: req.body.item, quantity: req.body.quantity })
-        .end();
+      res.status(200).send().end();
     } catch (error) {
       console.error('Controllers - Post - Error');
       console.error(error);

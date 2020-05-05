@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Components
-import Items from './Items';
+import ConnectedItems from './Items';
 
 // Styled-Components + ChakraUI
 import { SimpleGrid, Heading } from '@chakra-ui/core';
@@ -18,7 +18,7 @@ const GroceryList = () => {
           Quantity
         </Heading>
       </SimpleGrid>
-      <Items />
+      <ConnectedItems />
     </React.Fragment>
   );
 };
