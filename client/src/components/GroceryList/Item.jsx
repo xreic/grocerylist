@@ -9,7 +9,7 @@ const Item = ({ uuid, item, quantity }) => {
     <SimpleGrid
       columns="2"
       onClick={() => {
-        console.log(`${item} clicked.`);
+        console.log(`${item} clicked.`, uuid);
       }}
     >
       <Text>{item}</Text>
