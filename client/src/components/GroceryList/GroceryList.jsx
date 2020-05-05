@@ -55,10 +55,10 @@ class Items extends Component {
     return (
       <React.Fragment>
         <SimpleGrid columns="2">
-          <Heading as="h3" size="lg">
+          <Heading as="h5" size="md">
             Item
           </Heading>
-          <Heading as="h3" size="lg">
+          <Heading as="h5" size="md">
             Quantity
           </Heading>
         </SimpleGrid>
