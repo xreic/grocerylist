@@ -5,7 +5,7 @@ import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/core';
 
 // Formik
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import ValidatorField from './Helpers/ValidatorField';
 import { formValid } from './Helpers/validators';
 
@@ -38,8 +38,8 @@ const GroceryForm = () => {
                 value={values.quantity}
               />
             </Box>
+            <Button type="submit">Add Grocery</Button>
           </Stack>
-          <Button type="submit">Add Grocery</Button>
         </Form>
       )}
     </Formik>
