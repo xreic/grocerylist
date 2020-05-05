@@ -21,10 +21,7 @@ class Items extends Component {
   }
 
   render() {
-    if (this.props.items === 0) {
-      return null;
-    }
-    console.log(this.props.items);
+    if (this.props.items === 0) return null;
     return (
       <React.Fragment>
         {this.props.items.map((item) => (

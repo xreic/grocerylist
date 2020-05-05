@@ -1,12 +1,11 @@
 // Dependencies
 import axios from 'axios';
 
-const getItems = () => (dispatch) => {
-  axios.get('/groceries').then(({ data }) => {
-    dispatch({
-      type: 'GET_ITEMS',
-      payload: data
-    });
+const getItems = () => async (dispatch) => {
+  const { data } = await axios.get('/groceries');
+  dispatch({
+    type: 'GET_ITEMS',
+    payload: data
   });
 };
 
