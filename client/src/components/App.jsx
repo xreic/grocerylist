@@ -7,7 +7,7 @@ import { Box, Image, Heading, Stack } from '@chakra-ui/core';
 
 // Components
 import ConnectedForm from './Form/GroceryForm';
-import GroceryList from './GroceryList/GroceryList';
+import ConnecteList from './GroceryList/GroceryList';
 import ConnectedFilter from './Filter';
 
 // Containers
@@ -29,7 +29,7 @@ const App = () => (
         </Box>
 
         <Box>
-          <GroceryList />
+          <ConnecteList />
         </Box>
       </Stack>
     </BodyWrapper>
