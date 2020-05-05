@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react';
+import axios from 'axios';
 
 // Styled-Components + ChakraUI
 import { Box, Button, Stack } from '@chakra-ui/core';
@@ -14,12 +15,20 @@ const GroceryForm = () => {
     <Formik
       initialValues={{ item: '', quantity: '' }}
       validationSchema={formValid}
-      onSubmit={(data, { resetForm }) => {
-        console.log(`Formik Data:`, data);
-        resetForm();
+      onSubmit={async (data, { resetForm }) => {
+        const { item, quantity } = data;
+
+        try {
+          await axios.post('/groceries', { item, quantity });
+        } catch (error) {
+          console.error('GroceryForm - Error');
+          console.error(error);
+        } finally {
+          resetForm();
+        }
       }}
     >
-      {({ values }) => (
+      {({ values, isSubmitting }) => (
         <Form>
           <Stack spacing="1rem">
             <Box>
@@ -38,7 +47,13 @@ const GroceryForm = () => {
                 value={values.quantity}
               />
             </Box>
-            <Button type="submit">Add Grocery</Button>
+            <Button
+              isLoading={isSubmitting}
+              loadingText={`Adding ${values.item} to groceries`}
+              type="submit"
+            >
+              Add Grocery
+            </Button>
           </Stack>
         </Form>
       )}

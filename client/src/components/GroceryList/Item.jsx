@@ -6,7 +6,12 @@ import { SimpleGrid, Text } from '@chakra-ui/core';
 
 const Item = ({ uuid, item, quantity }) => {
   return (
-    <SimpleGrid columns="2">
+    <SimpleGrid
+      columns="2"
+      onClick={() => {
+        console.log(`${item} clicked.`);
+      }}
+    >
       <Text>{item}</Text>
       <Text>{quantity}</Text>
     </SimpleGrid>
