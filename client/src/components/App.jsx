@@ -7,6 +7,7 @@ import { Box, Image, Heading, List, ListItem, Stack } from '@chakra-ui/core';
 
 // Components
 import GroceryForm from './Form/GroceryForm';
+import GroceryList from './GroceryList/GroceryList';
 
 class App extends Component {
   constructor(props) {
@@ -28,32 +29,9 @@ class App extends Component {
               <GroceryForm />
             </Box>
 
-            <List styleType="disc">
-              <ListItem>
-                <span> frozen pizza </span>
-                <span> 5 </span>
-              </ListItem>
-              <ListItem>
-                <span> noosa yogurt </span>
-                <span> 10 </span>
-              </ListItem>
-              <ListItem>
-                <span> wine </span>
-                <span> 2 </span>
-              </ListItem>
-              <ListItem>
-                <span> iced coffe </span>
-                <span> 1 </span>
-              </ListItem>
-              <ListItem>
-                <span> a </span>
-                <span> 1 </span>
-              </ListItem>
-              <ListItem>
-                <span> pizza </span>
-                <span> 1 </span>
-              </ListItem>
-            </List>
+            <Box>
+              <GroceryList />
+            </Box>
           </Stack>
         </BodyWrapper>
       </HTMLBody>

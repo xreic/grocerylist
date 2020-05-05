@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Styled-Components + ChakraUI
-import { Box, Input, Button } from '@chakra-ui/core';
+import { Input, Button } from '@chakra-ui/core';
 
 // Formik
 import { Formik, Form, Field } from 'formik';
