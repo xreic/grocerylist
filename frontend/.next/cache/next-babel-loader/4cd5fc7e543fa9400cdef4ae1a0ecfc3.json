@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const resolvers = {\n  Query: {\n    viewer(_parent, _args, _context, _info) {\n      return {\n        id: 1,\n        name: 'John Smith',\n        status: 'cached'\n      };\n    }\n\n  }\n};","map":null,"metadata":{},"sourceType":"module"}

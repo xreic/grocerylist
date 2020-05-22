@@ -1,1 +1,0 @@
-{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport SignInForm from '../components/SignInForm';\n\nvar History = function History() {\n  return __jsx(\"div\", null, __jsx(SignInForm, null));\n};\n\nexport default History;","map":null,"metadata":{},"sourceType":"module"}
