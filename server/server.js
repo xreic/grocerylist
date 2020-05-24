@@ -62,4 +62,4 @@ server.use(
   )
 );
 
-server.listen(port, () => console.log('Docked @ port:', port));
+server.listen(port, () => console.log('Postgraphile listening @ port:', port));
