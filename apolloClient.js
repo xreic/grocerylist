@@ -5,6 +5,9 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import Cookies from 'js-cookie';
 
+// Express server port
+const port = process.env.SERVER_PORT || 4001;
+
 /**
  * Artificial delay to test optimistic updates
  * link: authLink.concat(delay).concat(httpLink)
@@ -28,11 +31,11 @@ const delay = setContext(
  * For URI put in the path and add "/graphql" for express + postgraphile
  */
 const httpLink = createHttpLink({
-  uri: `http://localhost:4001/graphql`
+  uri: `http://localhost:${port}/graphql`
 });
 
 const batchHTTPLink = new BatchHttpLink({
-  uri: `http://localhost:4001/graphql`,
+  uri: `http://localhost:${port}/graphql`,
   batchMax: 10,
   batchInterval: 100
 });

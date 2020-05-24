@@ -104,7 +104,7 @@ const client = new Client({ connectionString: AWS_INIT });
       // Function to checkout selected items
       client.query(`
         CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
-          ( products JSON[] )
+          ( products JSON[], createdAt TIMESTAMP WITH TIME ZONE )
             RETURNS ${process.env.DATABASE_SCHEMA}.history AS $$
 
               DECLARE
@@ -112,8 +112,8 @@ const client = new Client({ connectionString: AWS_INIT });
                 historyData ${process.env.DATABASE_SCHEMA}.history;
               BEGIN
                 IF jwtUUID IS NOT NULL THEN
-                  INSERT INTO ${process.env.DATABASE_SCHEMA}.history (history, owner_id)
-                    VALUES ($1, jwtUUID)
+                  INSERT INTO ${process.env.DATABASE_SCHEMA}.history (history, created_at, owner_id)
+                    VALUES ($1, $2, jwtUUID)
                     RETURNING * INTO historyData;
 
                   RETURN historyData;
@@ -175,13 +175,15 @@ const client = new Client({ connectionString: AWS_INIT });
 
       // add_to_history
       client.query(`
-        COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history(json[]) IS
-          'Add items that have been checked out into the history.';
+        COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
+          (products JSON[], createdAt TIMESTAMP WITH TIME ZONE) IS
+            'Add items that have been checked out into the history.';
       `),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history(json[]) TO
-          ${process.env.DATABASE_SCHEMA}_user;`
+        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
+          (products JSON[], createdAt TIMESTAMP WITH TIME ZONE) TO
+            ${process.env.DATABASE_SCHEMA}_user;`
       )
     ]);
 

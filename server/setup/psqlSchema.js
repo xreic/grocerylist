@@ -1,10 +1,9 @@
 require('dotenv').config();
+const { AWS_INIT } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
 
-const client = new Client({
-  connectionString: `postgres://${process.env.DATABASE_SCHEMA}_initiator:${process.env.DATABASE_INIT_PASSWORD}@${process.env.AWS_ENDPOINT}:${process.env.AWS_PORT}/${process.env.DATABASE_NAME}`
-});
+const client = new Client({ connectionString: AWS_INIT });
 
 (async () => {
   try {
@@ -60,7 +59,7 @@ const client = new Client({
         CREATE TABLE ${process.env.DATABASE_SCHEMA}.user (
           id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
           displayname TEXT NOT NULL CHECK (char_length(displayname) < 80),
-          created_at TIMESTAMP DEFAULT now()
+          created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
         );
       `),
 
@@ -93,7 +92,7 @@ const client = new Client({
           id SERIAL PRIMARY KEY,
           history JSON[],
           owner_id UUID REFERENCES ${process.env.DATABASE_SCHEMA}.user(id),
-          created_at TIMESTAMP DEFAULT now()
+          created_at TIMESTAMP WITH TIME ZONE
         );
       `),
 

@@ -1,5 +1,5 @@
 // Dependencies
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 // Styles
@@ -19,7 +19,6 @@ import { StatusContext } from '../lib/React/StatusContext';
 const GroceryCheckout = () => {
   // Hooks + Contexts
   const toast = useToast();
-  const [isCalling, setIsCalling] = useState(false);
   const { status, clear } = useContext(StatusContext);
 
   // Apollo
@@ -29,7 +28,6 @@ const GroceryCheckout = () => {
   // Handlers
   const handleCheckout = async (e) => {
     e.preventDefault();
-    setIsCalling(true);
 
     if (status.length < 1) {
       toast({
@@ -40,7 +38,7 @@ const GroceryCheckout = () => {
         isClosable: true
       });
     } else {
-      const input = { products: status };
+      const input = { products: status, createdat: new Date() };
 
       try {
         await addToHistory({
@@ -104,8 +102,6 @@ const GroceryCheckout = () => {
         });
       }
     }
-
-    setIsCalling(false);
   };
 
   return (
@@ -116,9 +112,6 @@ const GroceryCheckout = () => {
         alignSelf="center"
         maxWidth="300px"
         marginBottom="2rem"
-        isLoading={isCalling}
-        isDisabled={isCalling}
-        aira-busy={isCalling}
         aria-label={`Checkout the selected items`}
       >
         Checkout

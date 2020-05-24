@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import {
   Button,
   Flex,
+  Input,
   InputGroup,
   InputRightElement,
   SimpleGrid,
@@ -15,7 +16,7 @@ import {
 } from '@chakra-ui/core';
 import { AiOutlineForm, AiOutlineDoubleLeft } from 'react-icons/ai';
 import { FiLogIn } from 'react-icons/fi';
-import { StyledButton, StyledInput, StyledInputPW } from '../shared/styles';
+import { StyledButton } from '../shared/styles';
 
 // Helpers
 import {
@@ -110,7 +111,7 @@ const SignInForm = () => {
         maxWidth="400px"
       >
         <form method="post" onSubmit={handleSubmit}>
-          <StyledInput
+          <Input
             type="email"
             placeholder="Enter email"
             ref={emailRef}
@@ -119,7 +120,7 @@ const SignInForm = () => {
           />
 
           {isRegistering && (
-            <StyledInput
+            <Input
               type="text"
               placeholder="Enter display name"
               ref={nameRef}
@@ -129,7 +130,7 @@ const SignInForm = () => {
           )}
 
           <InputGroup size="md">
-            <StyledInputPW
+            <Input
               pr="4.5rem"
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter password"
@@ -147,7 +148,7 @@ const SignInForm = () => {
 
           {isRegistering && (
             <InputGroup size="md">
-              <StyledInputPW
+              <Input
                 pr="4.5rem"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Confirm password"

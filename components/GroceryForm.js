@@ -1,5 +1,5 @@
 // Dependencies
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 // Styles
@@ -19,7 +19,6 @@ const GroceryForm = () => {
 
   // Hooks
   const toast = useToast();
-  const [isCalling, setIsCalling] = useState(false);
 
   // Apollo
   const [addItem] = useMutation(ADD_ITEM_MUTATION);
@@ -27,7 +26,6 @@ const GroceryForm = () => {
   // Handlers
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsCalling(true);
 
     const input = {
       product: productRef.current.value,
@@ -64,8 +62,6 @@ const GroceryForm = () => {
 
       productRef.current.value = '';
       quantityRef.current.value = '';
-
-      productRef.current.focus();
     } catch (error) {
       toast({
         description: doctorError(error.message),
@@ -74,7 +70,6 @@ const GroceryForm = () => {
         isClosable: true
       });
     } finally {
-      setIsCalling(false);
       productRef.current.focus();
     }
   };
@@ -87,14 +82,12 @@ const GroceryForm = () => {
             <StyledInput
               type="text"
               placeholder="Product"
-              isDisabled={isCalling}
               ref={productRef}
               isRequired
             />
             <StyledInput
               type="number"
               placeholder="Quantity"
-              isDisabled={isCalling}
               ref={quantityRef}
               isRequired
             />
@@ -103,9 +96,6 @@ const GroceryForm = () => {
             type="submit"
             variantColor="blue"
             icon={MdAddShoppingCart}
-            isLoading={isCalling}
-            isDisabled={isCalling}
-            aira-busy={isCalling}
             aira-label="Add into to your grocery list"
             height
           />

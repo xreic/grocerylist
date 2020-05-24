@@ -4,7 +4,7 @@ const { Client } = require('pg');
 const chalk = require('chalk');
 
 const client = new Client({ connectionString: AWS_ROOT });
-console.log(AWS_ROOT);
+
 /**
  * Only run these scripts once
  * This is to setup the template1 database

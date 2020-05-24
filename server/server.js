@@ -7,6 +7,7 @@ const { postgraphile } = require('postgraphile');
 
 // Express
 const server = express();
+const port = process.env.SERVER_PORT || 4001;
 
 // PostgreSQL
 const connectionString = POSTGRAPHILE;
@@ -61,6 +62,4 @@ server.use(
   )
 );
 
-server.listen(process.env.$PORT + 1 || 4000);
-
-module.exports = server;
+server.listen(port, () => console.log('Docked @ port:', port));

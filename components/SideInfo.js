@@ -101,6 +101,16 @@ const SideInfo = () => {
 
               <ListItem paddingLeft="1rem">
                 <Link
+                  href="https://docs.docker.com/get-started/"
+                  color="black"
+                  isExternal
+                >
+                  Docker
+                </Link>
+              </ListItem>
+
+              <ListItem paddingLeft="1rem">
+                <Link
                   href="https://www.apollographql.com/"
                   color="black"
                   isExternal
@@ -116,6 +126,16 @@ const SideInfo = () => {
                   isExternal
                 >
                   PostGraphile
+                </Link>
+              </ListItem>
+
+              <ListItem paddingLeft="1rem">
+                <Link
+                  href="https://aws.amazon.com/rds/"
+                  color="black"
+                  isExternal
+                >
+                  AWS RDS PostgreSQL
                 </Link>
               </ListItem>
 

@@ -40,14 +40,8 @@ export const StyledButton = styled(IconButton)`
 `;
 
 export const StyledInput = styled(Input)`
-  :disabled {
-    opacity: 1;
-  }
-`;
-
-export const StyledInputPW = styled(Input)`
-  :disabled {
-    opacity: 1;
+  :required {
+    box-shadow: none;
   }
 `;
 
