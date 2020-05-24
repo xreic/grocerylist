@@ -26,10 +26,9 @@
     "setup": "npm-run-all schema roles auth functions perms",
     "express": "node server/server.js",
     "next:dev": "next dev",
-    "next:start": "next start -p $PORT",
+    "start": "next start -p $PORT",
     "build": "next build",
-    "start": "npm run express && npm run next:start",
-    "heroku-postbuild": "next build && next start -p $PORT && npm run express"
+    "heroku-postbuild": "npm run express"
   },
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",
