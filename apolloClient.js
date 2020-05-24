@@ -32,12 +32,12 @@ const delay = setContext(
  */
 const httpLink = createHttpLink({
   uri: `http://localhost:${port}/graphql`,
-  credentials: 'same-origin'
+  credentials: 'include'
 });
 
 const batchHTTPLink = new BatchHttpLink({
   uri: `http://localhost:${port}/graphql`,
-  credentials: 'same-origin',
+  credentials: 'include',
   batchMax: 10,
   batchInterval: 100
 });
