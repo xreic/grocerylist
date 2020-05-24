@@ -12,6 +12,13 @@ const port = process.env.SERVER_PORT || 4001;
 // PostgreSQL
 const connectionString = POSTGRAPHILE;
 
+console.log('====================================');
+console.log('POSTGRAPHILE:', POSTGRAPHILE);
+console.log('AWS_INIT:', AWS_INIT);
+console.log('process.env.APP_SECRET:', process.env.APP_SECRET);
+console.log('process.env.DATABASE_SCHEMA:', process.env.DATABASE_SCHEMA);
+console.log('====================================');
+
 // PostGraphile Options
 const optionDefaults = {
   ownerConnectionString: AWS_INIT,
