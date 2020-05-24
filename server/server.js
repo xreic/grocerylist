@@ -61,6 +61,6 @@ server.use(
   )
 );
 
-server.listen(process.env.$PORT || 4000);
+server.listen(process.env.$PORT + 1 || 4000);
 
 module.exports = server;
