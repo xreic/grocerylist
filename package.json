@@ -25,10 +25,9 @@
     "init": "npm-run-all init-db init-ext",
     "setup": "npm-run-all schema roles auth functions perms",
     "next:dev": "next dev",
-    "next:build": "next build",
+    "build": "next build",
     "next:start": "next start",
-    "heroku:start": "node server/server.js",
-    "heroku-postbuild": "npm run next:build && npm run heroku:start"
+    "heroku:start": "node server/server.js"
   },
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",
