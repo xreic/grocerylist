@@ -44,12 +44,12 @@ const optionsAddons =
         graphiql: false,
         retryOnInitFail: true,
         extendedErrors: ['errcode'],
-        setofFunctionsContainNulls: false,
+        setofFunctionsContainNulls: true
         /**
          * Default logging has performance issues
          * Make sure you have a logging system in place
          */
-        disableQueryLog: true
+        // disableQueryLog: true
       };
 
 // Route middleware
