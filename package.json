@@ -24,7 +24,7 @@
     "perms": "node -r dotenv/config setup/psqlPerms.js",
     "init": "npm-run-all init-su-role init-db init-ext",
     "setup": "npm-run-all schema roles auth functions perms",
-    "express": "node server.js",
+    "express": "node server/server.js",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start -p $PORT"
