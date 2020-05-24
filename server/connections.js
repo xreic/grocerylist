@@ -9,7 +9,7 @@ const AWS_ROOT =
   process.env.AWS_ENDPOINT +
   ':' +
   process.env.AWS_PORT +
-  '/postgres?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+  '/postgres?ssl=true';
 
 const AWS_INIT_POSTGRES =
   'postgres://' +
@@ -20,7 +20,7 @@ const AWS_INIT_POSTGRES =
   process.env.AWS_ENDPOINT +
   ':' +
   process.env.AWS_PORT +
-  '/postgres?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+  '/postgres?ssl=true';
 
 const AWS_INIT =
   'postgres://' +
@@ -33,7 +33,7 @@ const AWS_INIT =
   process.env.AWS_PORT +
   '/' +
   process.env.DATABASE_NAME +
-  '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+  '?ssl=true';
 
 const POSTGRAPHILE =
   'postgres://' +
@@ -46,6 +46,6 @@ const POSTGRAPHILE =
   process.env.AWS_PORT +
   '/' +
   process.env.DATABASE_NAME +
-  '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+  '?ssl=true';
 
 module.exports = { AWS_ROOT, AWS_INIT_POSTGRES, AWS_INIT, POSTGRAPHILE };
