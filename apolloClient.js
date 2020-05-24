@@ -28,11 +28,11 @@ const delay = setContext(
  * For URI put in the path and add "/graphql" for express + postgraphile
  */
 const httpLink = createHttpLink({
-  uri: `http://localhost:${process.env.$PORT + 1}/graphql`
+  uri: `http://localhost:4001/graphql`
 });
 
 const batchHTTPLink = new BatchHttpLink({
-  uri: `http://localhost:${process.env.$PORT + 1}/graphql`,
+  uri: `http://localhost:4001/graphql`,
   batchMax: 10,
   batchInterval: 100
 });
