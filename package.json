@@ -27,7 +27,7 @@
     "express": "node server/server.js",
     "next:dev": "next dev",
     "start": "next start -p $PORT",
-    "heroku-postbuild": "next build && next start -p $PORT"
+    "heroku-postbuild": "next build && next start -p $PORT && npm run express"
   },
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",
