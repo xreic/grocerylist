@@ -27,7 +27,7 @@
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
-    "heroku:start": "pm2-runtime start ecosystem.config.js",
+    "heroku:start": "node server/server.js",
     "heroku-postbuild": "npm run next:build && npm run heroku:start"
   },
   "dependencies": {
