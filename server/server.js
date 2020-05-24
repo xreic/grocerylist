@@ -1,6 +1,6 @@
 // Dependencies
 require('dotenv').config();
-const { POSTGRAPHILE } = require('./connections');
+const { AWS_INIT, POSTGRAPHILE } = require('./connections');
 const express = require('express');
 const cors = require('cors');
 const { postgraphile } = require('postgraphile');
