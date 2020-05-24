@@ -27,7 +27,8 @@
     "express": "node server/server.js",
     "next:dev": "next dev",
     "next:build": "next build",
-    "next:start": "next start -p $PORT"
+    "next:start": "next start -p $PORT",
+    "docker": "npm-run-all express next:start"
   },
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",

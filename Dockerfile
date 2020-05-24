@@ -10,8 +10,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN chmod a+rwx -R /usr/src/app/
 RUN npm install
 RUN npm run next:build
-RUN npm run express
 
 USER node
 
-CMD [ "npm", "run", "next:start" ]
+CMD [ "npm", "run", "docker" ]
