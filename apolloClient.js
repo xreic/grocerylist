@@ -21,6 +21,8 @@ const delay = setContext(
     })
 );
 
+console.log(`http://localhost:${port}/graphql`);
+
 /**
  * Two options
  *   Non-batched queries
