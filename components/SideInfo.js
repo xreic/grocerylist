@@ -67,7 +67,7 @@ const SideInfo = () => {
               </Link>
 
               <Link
-                href="https://github.com/xreic/hrla35-grocery-list/tree/ssr-gql"
+                href="https://github.com/xreic/grocerylist"
                 color="black"
                 isExternal
               >
@@ -88,30 +88,14 @@ const SideInfo = () => {
               </Heading>
 
               <ListItem paddingLeft="1rem">
-                <Link href="https://reactjs.org/" color="black" isExternal>
-                  React
-                </Link>
-              </ListItem>
-
-              <ListItem paddingLeft="1rem">
-                <Link href="https://nextjs.org/" color="black" isExternal>
+                <Link href="https://nextjs.org" color="black" isExternal>
                   Next.js
                 </Link>
               </ListItem>
 
               <ListItem paddingLeft="1rem">
                 <Link
-                  href="https://docs.docker.com/get-started/"
-                  color="black"
-                  isExternal
-                >
-                  Docker
-                </Link>
-              </ListItem>
-
-              <ListItem paddingLeft="1rem">
-                <Link
-                  href="https://www.apollographql.com/"
+                  href="https://www.apollographql.com"
                   color="black"
                   isExternal
                 >
@@ -121,7 +105,7 @@ const SideInfo = () => {
 
               <ListItem paddingLeft="1rem">
                 <Link
-                  href="https://www.graphile.org/postgraphile/"
+                  href="https://www.graphile.org/postgraphile"
                   color="black"
                   isExternal
                 >
@@ -131,7 +115,7 @@ const SideInfo = () => {
 
               <ListItem paddingLeft="1rem">
                 <Link
-                  href="https://aws.amazon.com/rds/"
+                  href="https://aws.amazon.com/rds"
                   color="black"
                   isExternal
                 >
@@ -141,7 +125,17 @@ const SideInfo = () => {
 
               <ListItem paddingLeft="1rem">
                 <Link
-                  href="https://emotion.sh/docs/introduction/"
+                  href="https://aws.amazon.com/ec2"
+                  color="black"
+                  isExternal
+                >
+                  AWS EC2
+                </Link>
+              </ListItem>
+
+              <ListItem paddingLeft="1rem">
+                <Link
+                  href="https://emotion.sh/docs/introduction"
                   color="black"
                   isExternal
                 >
@@ -152,7 +146,7 @@ const SideInfo = () => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Text>Powered By:</Text>
+            <Text>Powered By: AWS RDS + EC2</Text>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

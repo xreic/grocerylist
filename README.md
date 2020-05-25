@@ -17,8 +17,9 @@ This time with Next.js, Apollo, GraphQL, and PostGraphile.
 
 1. [Next.js](https://github.com/zeit/next.js/tree/canary/examples/api-routes-apollo-server-and-client)
 2. [Apollo](https://www.apollographql.com)
-3. [PostGraphile](https://www.graphile.org/postgraphile/)
-4. [Emotion](https://emotion.sh/docs/introduction/)
+3. [PostGraphile](https://www.graphile.org/postgraphile)
+4. [AWS RDS](https://aws.amazon.com/rds)
+5. [Emotion](https://emotion.sh/docs/introduction)
 
 ## Setup your own
 
@@ -48,8 +49,11 @@ This time with Next.js, Apollo, GraphQL, and PostGraphile.
 
 ## Related
 
-1. [Redux](https://github.com/xreic/hrla35-grocery-list/tree/redux)
-2. [Non-Heroku](https://github.com/xreic/hrla35-grocery-list/tree/ssr-gql)
+1. [SSR-GQL-PGQL](https://github.com/xreic/grocerylist)
+   1. SSR: [Next.js](https://nextjs.org)
+   2. GQL: [Apollo GraphQL](https://www.apollographql.com)
+   3. PGQL: [PostGraphile](https://www.graphile.org/postgraphile)
+2. [Redux](https://github.com/xreic/hrla35-grocery-list/tree/redux)
 
 ## Requirements
 
