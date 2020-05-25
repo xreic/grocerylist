@@ -24,7 +24,8 @@
     "perms": "node server/setup/psqlPerms.js",
     "init": "npm-run-all init-su-role init-db init-ext",
     "setup": "npm-run-all schema roles auth functions perms",
-    "express": "node server/server.js",
+    "express": "SET NODE_ENV=production& nohup node -r dotenv/config server/server.js",
+    "next:build": "next build",
     "next:dev": "next dev",
     "start": "next start -p $PORT",
     "heroku-postbuild": "next build && node server/server.js && next start -p $PORT"
