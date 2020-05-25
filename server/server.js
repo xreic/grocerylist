@@ -7,10 +7,6 @@ const { AWS_INIT, POSTGRAPHILE } = require('./connections');
 
 // Express
 const server = express();
-const port = process.env.SERVER_PORT || 4001;
-
-// PostgreSQL
-const connectionString = POSTGRAPHILE;
 
 // PostGraphile Options
 const optionDefaults = {
@@ -56,10 +52,10 @@ const optionsAddons =
 server.use(cors());
 server.use(
   postgraphile(
-    connectionString,
+    POSTGRAPHILE,
     process.env.DATABASE_SCHEMA,
     Object.assign(optionDefaults, optionsAddons)
   )
 );
 
-server.listen(port, () => console.log('Postgraphile listening @ port:', port));
+server.listen(8000, () => console.log('Postgraphile @ port 8000!'));

@@ -5,9 +5,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import Cookies from 'js-cookie';
 
-// Express server port
-const port = process.env.SERVER_PORT || 4001;
-
 /**
  * Artificial delay to test optimistic updates
  * link: authLink.concat(delay).concat(httpLink)
@@ -21,8 +18,6 @@ const delay = setContext(
     })
 );
 
-console.log(`http://localhost:${port}/graphql`);
-
 /**
  * Two options
  *   Non-batched queries
@@ -33,13 +28,13 @@ console.log(`http://localhost:${port}/graphql`);
  * For URI put in the path and add "/graphql" for express + postgraphile
  */
 const httpLink = createHttpLink({
-  uri: `http://localhost:${port}/graphql`,
+  uri: `http://3.101.14.233:8000/graphql`,
   credentials: 'include'
 });
 
 const batchHTTPLink = new BatchHttpLink({
-  uri: `http://localhost:${port}/graphql`,
-  credentials: 'include',
+  uri: `http://3.101.14.233:8000/graphql`,
+  // credentials: 'include',
   batchMax: 10,
   batchInterval: 100
 });
