@@ -5,18 +5,14 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import Cookies from 'js-cookie';
 
-/**
- * Artificial delay to test optimistic updates
- * link: authLink.concat(delay).concat(httpLink)
- */
-const delay = setContext(
-  (request) =>
-    new Promise((success, fail) => {
-      setTimeout(() => {
-        success();
-      }, 2000);
-    })
-);
+import { AWS_EC2_PUBLIC_IP, PGQL_PORT } from './env';
+
+// Environement Variables
+if (!AWS_EC2_PUBLIC_IP)
+  throw new Error(
+    'Remember to add your AWS EC2 public IP address or set it to localhost'
+  );
+const port = PGQL_PORT || 8000;
 
 /**
  * Two options
@@ -28,12 +24,12 @@ const delay = setContext(
  * For URI put in the path and add "/graphql" for express + postgraphile
  */
 const httpLink = createHttpLink({
-  uri: `http://3.101.14.233:8000/graphql`,
+  uri: `http://${AWS_EC2_PUBLIC_IP}:${port}/graphql`,
   credentials: 'include'
 });
 
 const batchHTTPLink = new BatchHttpLink({
-  uri: `http://3.101.14.233:8000/graphql`,
+  uri: `http://${AWS_EC2_PUBLIC_IP}:${port}/graphql`,
   // credentials: 'include',
   batchMax: 10,
   batchInterval: 100

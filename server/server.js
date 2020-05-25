@@ -1,5 +1,4 @@
 // Dependencies
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { postgraphile } = require('postgraphile');
@@ -7,6 +6,7 @@ const { AWS_INIT, POSTGRAPHILE } = require('./connections');
 
 // Express
 const server = express();
+const port = process.env.PGQL_PORT || 8000;
 
 // PostGraphile Options
 const optionDefaults = {
@@ -58,4 +58,4 @@ server.use(
   )
 );
 
-server.listen(8000, () => console.log('Postgraphile @ port 8000!'));
+server.listen(port, () => console.log(`Postgraphile @ port ${port}!`));
