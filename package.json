@@ -24,10 +24,10 @@
     "perms": "node server/setup/psqlPerms.js",
     "init": "npm-run-all init-su-role init-db init-ext",
     "setup": "npm-run-all schema roles auth functions perms",
-    "express": "SET NODE_ENV=production& nohup node -r dotenv/config server/server.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 8080",
+    "first-time-setup": "npm run all init setup build",
     "pm2": "pm2 start ecosystem.config.js --env prod && pm2 start npm --name \"next\" -- start && pm2 save"
   },
   "dependencies": {
