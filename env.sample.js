@@ -1,4 +1,7 @@
-// AWS
+/**
+ * AWS EC2 Public IP Address
+ * Defaults to localhost, so apolloClient.js doesn't break
+ */
 const AWS_EC2_PUBLIC_IP = 'localhost';
 
 // Express + PostGraphile
