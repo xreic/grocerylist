@@ -1,12 +1,12 @@
-# Grocery List
+# Grocery List v.PostGraphile + Next.js
 
 Simple grocery list web app deployed on AWS RDS + EC2 deployment.
 
-This time with Next.js, Apollo, GraphQL, and PostGraphile (with JWT for authentication and authorization).
+This time with [Next.js](https://nextjs.org), [Apollo GraphQL](https://www.apollographql.com), and [PostGraphile](https://www.graphile.org/postgraphile) (with JWT for authentication and authorization).
 
 ## Table of Contents
 
-- [Grocery List](#grocery-list)
+- [Grocery List v.PostGraphile + Next.js](#grocery-list-vpostgraphile--nextjs)
   - [Table of Contents](#table-of-contents)
   - [Tech](#tech)
   - [Related](#related)
@@ -24,11 +24,7 @@ This time with Next.js, Apollo, GraphQL, and PostGraphile (with JWT for authenti
 
 ## Related
 
-1. [SSR-GQL-PGQL](https://github.com/xreic/grocerylist)
-   1. SSR: [Next.js](https://nextjs.org)
-   2. GQL: [Apollo GraphQL](https://www.apollographql.com)
-   3. PGQL: [PostGraphile](https://www.graphile.org/postgraphile)
-2. [Redux](https://github.com/xreic/grocerylist/tree/redux)
+1. [Redux](https://github.com/xreic/grocerylist/tree/redux)
 
 ## Notes
 
