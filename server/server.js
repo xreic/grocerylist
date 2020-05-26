@@ -1,8 +1,9 @@
 // Dependencies
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { postgraphile } = require('postgraphile');
-const { AWS_INIT, POSTGRAPHILE } = require('./connections');
+const { RDS_INIT, POSTGRAPHILE } = require('./connections');
 
 // Express
 const server = express();
@@ -10,7 +11,7 @@ const port = process.env.PGQL_PORT || 8000;
 
 // PostGraphile Options
 const optionDefaults = {
-  ownerConnectionString: AWS_INIT,
+  ownerConnectionString: RDS_INIT,
   pgDefaultRole: `${process.env.DATABASE_SCHEMA}_anonymous`,
   jwtSecret: process.env.APP_SECRET,
   jwtPgTypeIdentifier: `${process.env.DATABASE_SCHEMA}.jwt_token`,

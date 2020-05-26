@@ -1,9 +1,9 @@
 require('dotenv').config();
-const { AWS_INIT } = require('../connections');
+const { RDS_INIT } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
 
-const client = new Client({ connectionString: AWS_INIT });
+const client = new Client({ connectionString: RDS_INIT });
 
 /**
  * Only run these scripts once
