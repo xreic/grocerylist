@@ -28,7 +28,7 @@ This time with Next.js, Apollo, GraphQL, and PostGraphile (with JWT for authenti
    1. SSR: [Next.js](https://nextjs.org)
    2. GQL: [Apollo GraphQL](https://www.apollographql.com)
    3. PGQL: [PostGraphile](https://www.graphile.org/postgraphile)
-2. [Redux](https://github.com/xreic/hrla35-grocery-list/tree/redux)
+2. [Redux](https://github.com/xreic/grocerylist/tree/redux)
 
 ## Notes
 
@@ -64,6 +64,7 @@ Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` f
             2. Go to Step 4
          4. `npm run pm2`
             1. Starts the app
+3. Go the port `8080` of your AWS EC2 public IP.
 
 ## Requirements
 
