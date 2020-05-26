@@ -31,6 +31,8 @@ This time with [Next.js](https://nextjs.org), [Apollo GraphQL](https://www.apoll
 If you are running on Windows and want to use `nodemon` for the `express-postgraphile` server combo, then you'll have to create a `.env` file based on the `options` within `ecosystem.config.sample.js`.
 Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` for production.
 
+Sometimes the EC2 instance will hang when running the build script. You'll have to stop the instance and reboot it, if it does and then run then continue starting with the build script again.
+
 ## Setup your own
 
 1. Start up an instance of:
