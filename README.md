@@ -32,7 +32,8 @@ This time with Next.js, Apollo, GraphQL, and PostGraphile (with JWT for authenti
 
 ## Notes
 
-If you are running on Windows and want to use `nodemon` for the `express-postgraphile` server combo, then you'll have to create a `.env` file based on the `options` within `ecosystem.config.sample.js` and run `npm run w-dev:dev` for development or `npm run w-dev:prod` for production.
+If you are running on Windows and want to use `nodemon` for the `express-postgraphile` server combo, then you'll have to create a `.env` file based on the `options` within `ecosystem.config.sample.js`.
+Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` for production.
 
 ## Setup your own
 
@@ -44,7 +45,6 @@ If you are running on Windows and want to use `nodemon` for the `express-postgra
    2. AWS EC2
       1. Install Node v12+
       2. Install [PM2](https://github.com/Unitech/pm2)
-         1. `npm install -g pm2`
 2. Pull down the repo
    1. Create `env.js` and `ecosystem.config.js`
       1. Follow the samples
