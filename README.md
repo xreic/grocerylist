@@ -32,7 +32,7 @@ Now using Redux!
 
 ## Related
 
-1. [SSR-GQL](https://github.com/xreic/hrla35-grocery-list/tree/ssr-gql)
+1. [PostGraphile](https://github.com/xreic/grocerylist/tree/postgraphile)
 
 ## Requirements
 
