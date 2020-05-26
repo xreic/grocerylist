@@ -9,7 +9,7 @@ module.exports = {
 
     // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//));
     config.plugins.push(new FriendlyErrorsWebpackPlugin());
-    config.plugins.push(new WebpackBar());
+    // config.plugins.push(new WebpackBar());
 
     return config;
   }

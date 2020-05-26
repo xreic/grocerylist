@@ -8,6 +8,7 @@ import Meta from './Meta';
 import Header from './Header';
 import SideInfo from './SideInfo';
 import ForceSignIn from './ForceSignIn';
+import Safety from './Safety';
 
 const Page = (props) => (
   <Layout>
@@ -16,6 +17,7 @@ const Page = (props) => (
       <Header client={props.client} />
       <SideInfo />
       <ForceSignIn>{props.children}</ForceSignIn>
+      <Safety />
     </User>
   </Layout>
 );
