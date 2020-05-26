@@ -10,8 +10,8 @@ This time with [Next.js](https://nextjs.org), [Apollo GraphQL](https://www.apoll
   - [Table of Contents](#table-of-contents)
   - [Tech](#tech)
   - [Related](#related)
-  - [Notes](#notes)
   - [Setup your own](#setup-your-own)
+  - [Notes](#notes)
   - [Requirements](#requirements)
 
 ## Tech
@@ -26,13 +26,6 @@ This time with [Next.js](https://nextjs.org), [Apollo GraphQL](https://www.apoll
 
 1. [Redux](https://github.com/xreic/grocerylist/tree/redux)
 
-## Notes
-
-If you are running on Windows and want to use `nodemon` for the `express-postgraphile` server combo, then you'll have to create a `.env` file based on the `options` within `ecosystem.config.sample.js`.
-Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` for production.
-
-Sometimes the EC2 instance will hang when running the build script. You'll have to stop the instance and reboot it, if it does and then run then continue starting with the build script again.
-
 ## Setup your own
 
 1. Start up an instance of:
@@ -44,8 +37,8 @@ Sometimes the EC2 instance will hang when running the build script. You'll have 
       1. Install Node v12+
       2. Install [PM2](https://github.com/Unitech/pm2)
 2. Pull down the repo
-   1. Create `.env`, `env.js`, `ecosystem.config.js`
-      1. Follow the samples
+   1. Create `env.js`
+      1. Follow the sample
    2. Install dependencies (run in the root directory of the repo)
       1. `npm install`
    3. Run scripts
@@ -63,6 +56,15 @@ Sometimes the EC2 instance will hang when running the build script. You'll have 
          4. `npm run pm2`
             1. Starts the app
 3. Go the port `8080` of your AWS EC2 public IP.
+   1. If you change the ports, remember to also change it in `package.json`
+
+## Notes
+
+- If you are running on Windows and want to use `nodemon` for the `express-postgraphile` server combo, then you'll have to run `npm run w-dev:dev` for development or `npm run w-dev:prod` for production.
+
+- Sometimes the EC2 instance will hang when running the build script. You'll have to stop the instance and reboot it, if it does and then run then continue starting with the build script again.
+
+- If you are running in development, comment out the two lines `WebpackBar` as it makes the CLI go crazy.
 
 ## Requirements
 
