@@ -50,8 +50,8 @@ Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` f
       1. For first time setup
          1. `npm run first-time-setup`
             1. DO NOT RUN THIS MORE THAN ONCE
-            2. This will setup the PostgreSQL database and run the build script
-            3. Go to Step 4
+            2. This will setup the PostgreSQL database
+            3. Go to Step 3
          2. `npm run setup`
             1. This will reset the database
             2. Go to Step 3
