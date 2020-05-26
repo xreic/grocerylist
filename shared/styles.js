@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css, Global } from '@emotion/core';
 import { AccordionHeader, IconButton, Input } from '@chakra-ui/core';
 
+// Global styling
 export const globalStyles = (
   <Global
     styles={css`
@@ -39,6 +40,7 @@ export const StyledButton = styled(IconButton)`
   }
 `;
 
+// Firefox thing
 export const StyledInput = styled(Input)`
   :required {
     box-shadow: none;

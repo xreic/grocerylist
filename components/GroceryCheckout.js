@@ -16,6 +16,10 @@ import { doctorError } from '../lib/doctorError';
 // React
 import { StatusContext } from '../lib/React/StatusContext';
 
+/**
+ * This component handles all the functionality for
+ * when a user wants to checkout items
+ */
 const GroceryCheckout = () => {
   // Hooks + Contexts
   const toast = useToast();
@@ -29,6 +33,7 @@ const GroceryCheckout = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
 
+    // If no items are selected, then do not proceed
     if (status.length < 1) {
       toast({
         description:
@@ -41,10 +46,15 @@ const GroceryCheckout = () => {
       const input = { products: status, createdat: new Date() };
 
       try {
+        /**
+         * Adds the items to the history
+         * No optimistic response as a view switch is required to see the history
+         */
         await addToHistory({
           variables: { input },
 
           update: (cache, { data: { addToHistory } }) => {
+            // Destructure the required information out from the cache
             const {
               currentUserHistory: { nodes }
             } = cache.readQuery({
@@ -53,6 +63,7 @@ const GroceryCheckout = () => {
 
             const { history } = addToHistory;
 
+            // Rewrite the cache with the new information
             cache.writeQuery({
               query: USER_HISTORY_QUERY,
               data: {
@@ -62,6 +73,9 @@ const GroceryCheckout = () => {
           }
         });
 
+        /**
+         * For all items selected, this will remove it from the list
+         */
         await status.forEach(async (item) => {
           await deleteItem({
             variables: { input: { id: item.id } },
