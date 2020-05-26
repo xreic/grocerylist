@@ -42,7 +42,7 @@ Once complete, run `npm run w-dev:dev` for development or `npm run w-dev:prod` f
       1. Install Node v12+
       2. Install [PM2](https://github.com/Unitech/pm2)
 2. Pull down the repo
-   1. Create `env.js` and `ecosystem.config.js`
+   1. Create `.env`, `env.js`, `ecosystem.config.js`
       1. Follow the samples
    2. Install dependencies (run in the root directory of the repo)
       1. `npm install`
