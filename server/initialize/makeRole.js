@@ -1,7 +1,12 @@
-require('dotenv').config();
-const { RDS_ROOT } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
+
+const { RDS_ROOT } = require('../connections');
+const {
+  DATABASE_SCHEMA,
+  DATABASE_INIT_PASSWORD,
+  RDS_ENDPOINT
+} = require('../../env');
 
 const client = new Client({ connectionString: RDS_ROOT });
 
@@ -15,23 +20,37 @@ const client = new Client({ connectionString: RDS_ROOT });
     await client.connect();
 
     console.log(chalk.black.bgRed('===================================='));
-    console.log(chalk.black.bgRed('ONLY RUN THIS SCRIPT ONCE'));
+    console.log(chalk.black.bgRed('ONLY RUN THE INIT SCRIPT ONCE'));
     console.log(chalk.black.bgRed('===================================='));
 
-    await client.query(
-      `CREATE ROLE ${process.env.DATABASE_SCHEMA}_INITIATOR
-        LOGIN CREATEDB CREATEROLE
-          PASSWORD '${process.env.DATABASE_INIT_PASSWORD}'`
-    );
+    // await client.query(
+    //   `CREATE ROLE ${DATABASE_SCHEMA}_INITIATOR
+    //     LOGIN CREATEDB CREATEROLE
+    //       PASSWORD '${DATABASE_INIT_PASSWORD}'`
+    // );
+
+    if (RDS_ENDPOINT !== 'localhost') {
+      await client.query(
+        `CREATE ROLE ${DATABASE_SCHEMA}_INITIATOR
+          LOGIN CREATEDB CREATEROLE
+            PASSWORD '${DATABASE_INIT_PASSWORD}'`
+      );
+
+      await client.query(
+        `GRANT rds_superuser TO ${DATABASE_SCHEMA}_INITIATOR;`
+      );
+    } else {
+      await client.query(
+        `CREATE ROLE ${DATABASE_SCHEMA}_INITIATOR
+          LOGIN SUPERUSER
+            PASSWORD '${DATABASE_INIT_PASSWORD}'`
+      );
+    }
 
     await client.query(
-      `GRANT rds_superuser TO ${process.env.DATABASE_SCHEMA}_INITIATOR;`
-    );
-
-    await client.query(
-      `ALTER ROLE ${process.env.DATABASE_SCHEMA}_INITIATOR
+      `ALTER ROLE ${DATABASE_SCHEMA}_INITIATOR
         SET search_path
-          TO ${process.env.DATABASE_SCHEMA}, extensions;`
+          TO ${DATABASE_SCHEMA}, extensions;`
     );
 
     await client.end();

@@ -7,12 +7,14 @@ import Cookies from 'js-cookie';
 
 import { AWS_EC2_PUBLIC_IP, PGQL_PORT } from './env';
 
-// Environement Variables
+// Environement Variables & Abstractions
 if (!AWS_EC2_PUBLIC_IP)
   throw new Error(
     'Remember to add your AWS EC2 public IP address or set it to localhost'
   );
+
 const port = PGQL_PORT || 8000;
+const uri = `http://${AWS_EC2_PUBLIC_IP}:${port}/graphql`;
 
 /**
  * Two options
@@ -23,14 +25,10 @@ const port = PGQL_PORT || 8000;
  *
  * For URI put in the path and add "/graphql" for express + postgraphile
  */
-const httpLink = createHttpLink({
-  uri: `http://${AWS_EC2_PUBLIC_IP}:${port}/graphql`,
-  credentials: 'include'
-});
+const httpLink = createHttpLink({ uri });
 
 const batchHTTPLink = new BatchHttpLink({
-  uri: `http://${AWS_EC2_PUBLIC_IP}:${port}/graphql`,
-  // credentials: 'include',
+  uri,
   batchMax: 10,
   batchInterval: 100
 });

@@ -5,9 +5,11 @@ module.exports = {
     // Important: return the modified config
 
     const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+    const WebpackBar = require('webpackbar');
 
     // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//));
     config.plugins.push(new FriendlyErrorsWebpackPlugin());
+    config.plugins.push(new WebpackBar());
 
     return config;
   }

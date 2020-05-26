@@ -1,7 +1,8 @@
-require('dotenv').config();
-const { RDS_INIT } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
+
+const { RDS_INIT } = require('../connections');
+const { DATABASE_SCHEMA } = require('../../env');
 
 const client = new Client({ connectionString: RDS_INIT });
 
@@ -11,37 +12,31 @@ const client = new Client({ connectionString: RDS_INIT });
 
     // Drop all functions
     await Promise.all([
+      client.query(`DROP FUNCTION IF EXISTS ${DATABASE_SCHEMA}.current_user;`),
+
       client.query(
-        `DROP FUNCTION IF EXISTS ${process.env.DATABASE_SCHEMA}.current_user;`
+        `DROP FUNCTION IF EXISTS ${DATABASE_SCHEMA}.current_user_items;`
       ),
 
       client.query(
-        `DROP FUNCTION IF EXISTS ${process.env.DATABASE_SCHEMA}.current_user_items;`
+        `DROP FUNCTION IF EXISTS ${DATABASE_SCHEMA}.current_user_history;`
       ),
 
-      client.query(
-        `DROP FUNCTION IF EXISTS ${process.env.DATABASE_SCHEMA}.current_user_history;`
-      ),
+      client.query(`DROP FUNCTION IF EXISTS ${DATABASE_SCHEMA}.add_item;`),
 
-      client.query(
-        `DROP FUNCTION IF EXISTS ${process.env.DATABASE_SCHEMA}.add_item;`
-      ),
-
-      client.query(
-        `DROP FUNCTION IF EXISTS ${process.env.DATABASE_SCHEMA}.add_to_history;`
-      )
+      client.query(`DROP FUNCTION IF EXISTS ${DATABASE_SCHEMA}.add_to_history;`)
     ]);
 
     // Create all custom SQL functions
     await Promise.all([
       // Retrieves the information of the current user
       client.query(`
-        CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.current_user
+        CREATE FUNCTION ${DATABASE_SCHEMA}.current_user
           ()
-            RETURNS ${process.env.DATABASE_SCHEMA}.user AS $$
+            RETURNS ${DATABASE_SCHEMA}.user AS $$
 
               SELECT *
-              FROM ${process.env.DATABASE_SCHEMA}.user
+              FROM ${DATABASE_SCHEMA}.user
               WHERE id = NULLIF(CURRENT_SETTING('jwt.claims.user_id', TRUE), '')::UUID
 
         $$ LANGUAGE SQL STABLE;
@@ -49,12 +44,12 @@ const client = new Client({ connectionString: RDS_INIT });
 
       // Retrieves the list items of the current user
       client.query(`
-        CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_items
+        CREATE FUNCTION ${DATABASE_SCHEMA}.current_user_items
           ()
-            RETURNS SETOF ${process.env.DATABASE_SCHEMA}.item AS $$
+            RETURNS SETOF ${DATABASE_SCHEMA}.item AS $$
 
               SELECT *
-              FROM ${process.env.DATABASE_SCHEMA}.item
+              FROM ${DATABASE_SCHEMA}.item
               WHERE
                 owner_id = NULLIF(CURRENT_SETTING('jwt.claims.user_id', TRUE), '')::UUID
               ORDER BY id DESC;
@@ -64,12 +59,12 @@ const client = new Client({ connectionString: RDS_INIT });
 
       // Retrieves the history of the current user
       client.query(`
-        CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_history
+        CREATE FUNCTION ${DATABASE_SCHEMA}.current_user_history
           ()
-            RETURNS SETOF ${process.env.DATABASE_SCHEMA}.history AS $$
+            RETURNS SETOF ${DATABASE_SCHEMA}.history AS $$
 
               SELECT *
-              FROM ${process.env.DATABASE_SCHEMA}.history
+              FROM ${DATABASE_SCHEMA}.history
               WHERE
                 owner_id = NULLIF(CURRENT_SETTING('jwt.claims.user_id', TRUE), '')::UUID
               ORDER BY created_at DESC;
@@ -79,16 +74,16 @@ const client = new Client({ connectionString: RDS_INIT });
 
       // Function to allow users to add items to their list
       client.query(`
-        CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.add_item
+        CREATE FUNCTION ${DATABASE_SCHEMA}.add_item
           ( product TEXT, quantity INT )
-            RETURNS ${process.env.DATABASE_SCHEMA}.item AS $$
+            RETURNS ${DATABASE_SCHEMA}.item AS $$
 
               DECLARE
                 jwtUUID UUID := NULLIF(CURRENT_SETTING('jwt.claims.user_id', TRUE), '')::UUID;
-                itemData ${process.env.DATABASE_SCHEMA}.item;
+                itemData ${DATABASE_SCHEMA}.item;
               BEGIN
                 IF jwtUUID IS NOT NULL THEN
-                  INSERT INTO ${process.env.DATABASE_SCHEMA}.item (product, quantity, owner_id)
+                  INSERT INTO ${DATABASE_SCHEMA}.item (product, quantity, owner_id)
                     VALUES ($1, $2, jwtUUID)
                     RETURNING * INTO itemData;
 
@@ -103,16 +98,16 @@ const client = new Client({ connectionString: RDS_INIT });
 
       // Function to checkout selected items
       client.query(`
-        CREATE FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
+        CREATE FUNCTION ${DATABASE_SCHEMA}.add_to_history
           ( products JSON[], createdAt TIMESTAMP WITH TIME ZONE )
-            RETURNS ${process.env.DATABASE_SCHEMA}.history AS $$
+            RETURNS ${DATABASE_SCHEMA}.history AS $$
 
               DECLARE
                 jwtUUID UUID := NULLIF(CURRENT_SETTING('jwt.claims.user_id', TRUE), '')::UUID;
-                historyData ${process.env.DATABASE_SCHEMA}.history;
+                historyData ${DATABASE_SCHEMA}.history;
               BEGIN
                 IF jwtUUID IS NOT NULL THEN
-                  INSERT INTO ${process.env.DATABASE_SCHEMA}.history (history, created_at, owner_id)
+                  INSERT INTO ${DATABASE_SCHEMA}.history (history, created_at, owner_id)
                     VALUES ($1, $2, jwtUUID)
                     RETURNING * INTO historyData;
 
@@ -130,67 +125,67 @@ const client = new Client({ connectionString: RDS_INIT });
     await Promise.all([
       // current_user
       client.query(`
-        COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user() IS
+        COMMENT ON FUNCTION ${DATABASE_SCHEMA}.current_user() IS
           'Retrieves the person who was identified by our JWT.';
       `),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user() TO
-          ${process.env.DATABASE_SCHEMA}_anonymous,
-          ${process.env.DATABASE_SCHEMA}_user;`
+        `GRANT EXECUTE ON FUNCTION ${DATABASE_SCHEMA}.current_user() TO
+          ${DATABASE_SCHEMA}_anonymous,
+          ${DATABASE_SCHEMA}_user;`
       ),
 
       // current_user_items
       client.query(
-        `COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_items() IS
+        `COMMENT ON FUNCTION ${DATABASE_SCHEMA}.current_user_items() IS
           'Retrieves all the items in the list of the current user.';`
       ),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_items() TO
-          ${process.env.DATABASE_SCHEMA}_user;`
+        `GRANT EXECUTE ON FUNCTION ${DATABASE_SCHEMA}.current_user_items() TO
+          ${DATABASE_SCHEMA}_user;`
       ),
 
       // current_user_history
       client.query(
-        `COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_history() IS
+        `COMMENT ON FUNCTION ${DATABASE_SCHEMA}.current_user_history() IS
           'Retrieves the history of the current user.';`
       ),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.current_user_history() TO
-          ${process.env.DATABASE_SCHEMA}_user;`
+        `GRANT EXECUTE ON FUNCTION ${DATABASE_SCHEMA}.current_user_history() TO
+          ${DATABASE_SCHEMA}_user;`
       ),
 
       // add_item
       client.query(`
-        COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_item(text, int) IS
+        COMMENT ON FUNCTION ${DATABASE_SCHEMA}.add_item(text, int) IS
           'Replaced default create item.';
       `),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_item(text, int) TO
-          ${process.env.DATABASE_SCHEMA}_user;`
+        `GRANT EXECUTE ON FUNCTION ${DATABASE_SCHEMA}.add_item(text, int) TO
+          ${DATABASE_SCHEMA}_user;`
       ),
 
       // add_to_history
       client.query(`
-        COMMENT ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
+        COMMENT ON FUNCTION ${DATABASE_SCHEMA}.add_to_history
           (products JSON[], createdAt TIMESTAMP WITH TIME ZONE) IS
             'Add items that have been checked out into the history.';
       `),
 
       client.query(
-        `GRANT EXECUTE ON FUNCTION ${process.env.DATABASE_SCHEMA}.add_to_history
+        `GRANT EXECUTE ON FUNCTION ${DATABASE_SCHEMA}.add_to_history
           (products JSON[], createdAt TIMESTAMP WITH TIME ZONE) TO
-            ${process.env.DATABASE_SCHEMA}_user;`
+            ${DATABASE_SCHEMA}_user;`
       )
     ]);
 
     await client.end();
-    console.log(chalk.black.bgGreen('SUCCESS: FUNCTIONS Script!'));
+    console.log(chalk.black.bgGreen('SUCCESS: FUNCTIONS SCRIPT!'));
   } catch (error) {
-    console.error(chalk.black.bgRed('ERROR: FUNCTIONS Script!'));
+    console.error(chalk.black.bgRed('ERROR: FUNCTIONS SCRIPT!'));
     console.error(error);
   }
 })();

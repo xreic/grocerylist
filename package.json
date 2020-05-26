@@ -1,5 +1,5 @@
 {
-  "name": "grocerylist-postgraphile",
+  "name": "heroku-grocerylist-ssr-gql",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,18 +10,18 @@
     "npm": "6.14.4"
   },
   "scripts": {
-    "w-dev:prod": "SET NODE_ENV=production& nodemon -r dotenv/config server.js",
-    "w-dev:dev": "SET NODE_ENV=development& nodemon -r dotenv/config server.js",
-    "dev:prod": "NODE_ENV=production& nodemon -r dotenv/config server.js",
-    "dev:dev": "NODE_ENV=development& nodemon -r dotenv/config server.js",
-    "init-su-role": "node -r dotenv/config server/initialize/makeRole.js",
-    "init-db": "node -r dotenv/config server/initialize/makeDatabase.js",
-    "init-ext": "node -r dotenv/config server/initialize/makeExtensions.js",
-    "schema": "node -r dotenv/config server/setup/psqlSchema.js",
-    "roles": "node -r dotenv/config server/setup/psqlRoles.js",
-    "auth": "node -r dotenv/config server/setup/psqlAuth.js",
-    "functions": "node -r dotenv/config server/setup/psqlFunctions.js",
-    "perms": "node -r dotenv/config server/setup/psqlPerms.js",
+    "w-dev:prod": "SET NODE_ENV=production& nodemon -r dotenv/config server/server.js",
+    "w-dev:dev": "SET NODE_ENV=development& nodemon -r dotenv/config server/server.js",
+    "dev:prod": "NODE_ENV=production& nodemon -r dotenv/config server/server.js",
+    "dev:dev": "NODE_ENV=development& nodemon -r dotenv/config server/server.js",
+    "init-su-role": "node server/initialize/makeRole.js",
+    "init-db": "node server/initialize/makeDatabase.js",
+    "init-ext": "node server/initialize/makeExtensions.js",
+    "schema": "node server/setup/psqlSchema.js",
+    "roles": "node server/setup/psqlRoles.js",
+    "auth": "node server/setup/psqlAuth.js",
+    "functions": "node server/setup/psqlFunctions.js",
+    "perms": "node server/setup/psqlPerms.js",
     "init": "npm-run-all init-su-role init-db init-ext",
     "setup": "npm-run-all schema roles auth functions perms",
     "dev": "next dev",
@@ -71,6 +71,7 @@
     "babel-plugin-graphql-tag": "^2.5.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "nodemon": "^2.0.4",
-    "pm2": "^4.4.0"
+    "pm2": "^4.4.0",
+    "webpackbar": "^4.0.0"
   }
 }

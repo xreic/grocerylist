@@ -67,7 +67,7 @@ const SideInfo = () => {
               </Link>
 
               <Link
-                href="https://github.com/xreic/grocerylist"
+                href="https://github.com/xreic/grocerylist/tree/postgraphile"
                 color="black"
                 isExternal
               >

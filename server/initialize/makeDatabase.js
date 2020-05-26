@@ -1,7 +1,8 @@
-require('dotenv').config();
-const { RDS_INIT_POSTGRES } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
+
+const { RDS_INIT_POSTGRES } = require('../connections');
+const { DATABASE_NAME, DATABASE_SCHEMA } = require('../../env');
 
 const client = new Client({ connectionString: RDS_INIT_POSTGRES });
 
@@ -14,12 +15,12 @@ const client = new Client({ connectionString: RDS_INIT_POSTGRES });
   try {
     await client.connect();
 
-    await client.query(`CREATE DATABASE ${process.env.DATABASE_NAME};`);
+    await client.query(`CREATE DATABASE ${DATABASE_NAME};`);
 
     await client.query(
-      `ALTER DATABASE ${process.env.DATABASE_NAME}
+      `ALTER DATABASE ${DATABASE_NAME}
         SET search_path
-          TO ${process.env.DATABASE_SCHEMA}, extensions;`
+          TO ${DATABASE_SCHEMA}, extensions;`
     );
 
     await client.end();

@@ -1,20 +1,24 @@
 // Dependencies
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { postgraphile } = require('postgraphile');
+
+// Environment Variables
+const { PGQL_PORT, APP_SECRET, DATABASE_SCHEMA } = require('../env');
+
+// PostgreSQL Connection Strings
 const { RDS_INIT, POSTGRAPHILE } = require('./connections');
 
 // Express
 const server = express();
-const port = process.env.PGQL_PORT || 8000;
+const port = PGQL_PORT || 8000;
 
 // PostGraphile Options
 const optionDefaults = {
   ownerConnectionString: RDS_INIT,
-  pgDefaultRole: `${process.env.DATABASE_SCHEMA}_anonymous`,
-  jwtSecret: process.env.APP_SECRET,
-  jwtPgTypeIdentifier: `${process.env.DATABASE_SCHEMA}.jwt_token`,
+  pgDefaultRole: `${DATABASE_SCHEMA}_anonymous`,
+  jwtSecret: APP_SECRET,
+  jwtPgTypeIdentifier: `${DATABASE_SCHEMA}.jwt_token`,
   subscriptions: true,
   dynamicJson: true,
   ignoreRBAC: false,
@@ -54,7 +58,7 @@ server.use(cors());
 server.use(
   postgraphile(
     POSTGRAPHILE,
-    process.env.DATABASE_SCHEMA,
+    DATABASE_SCHEMA,
     Object.assign(optionDefaults, optionsAddons)
   )
 );

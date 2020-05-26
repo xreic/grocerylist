@@ -1,7 +1,7 @@
-require('dotenv').config();
-const { RDS_INIT } = require('../connections');
 const { Client } = require('pg');
 const chalk = require('chalk');
+
+const { RDS_INIT } = require('../connections');
 
 const client = new Client({ connectionString: RDS_INIT });
 
@@ -36,7 +36,7 @@ const client = new Client({ connectionString: RDS_INIT });
     console.log(chalk.black.bgGreen('SUCCESS: INIT-EXTENIONS SCRIPT!'));
 
     console.log(chalk.black.bgRed('===================================='));
-    console.log(chalk.black.bgRed('ONLY RUN THIS SCRIPT ONCE'));
+    console.log(chalk.black.bgRed('ONLY RUN THE INIT SCRIPT ONCE'));
     console.log(chalk.black.bgRed('===================================='));
   } catch (error) {
     console.error(chalk.black.bgRed('ERROR: INIT-EXTENIONS SCRIPT!'));

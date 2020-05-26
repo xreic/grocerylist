@@ -14,7 +14,6 @@
 
 # production
 /build
-schema.graphql
 
 # misc
 .DS_Store
@@ -25,6 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env
 env.js
-ecosystem.config.js

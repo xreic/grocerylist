@@ -1,51 +1,40 @@
-require('dotenv').config();
+const {
+  RDS_USER,
+  RDS_PASSWORD,
+  RDS_ENDPOINT,
+  RDS_PORT,
+  DATABASE_SCHEMA,
+  DATABASE_INIT_PASSWORD,
+  DATABASE_NAME,
+  POSTGRAPHILE_PASSWORD
+} = require('../env.js');
 
-const RDS_ROOT =
-  'progres://' +
-  process.env.RDS_USER +
-  ':' +
-  process.env.RDS_PASSWORD +
-  '@' +
-  process.env.RDS_ENDPOINT +
-  ':' +
-  process.env.RDS_PORT +
-  '/postgres?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+/**
+ * Abstractions
+ */
 
-const RDS_INIT_POSTGRES =
-  'postgres://' +
-  process.env.DATABASE_SCHEMA +
-  '_initiator:' +
-  process.env.DATABASE_INIT_PASSWORD +
-  '@' +
-  process.env.RDS_ENDPOINT +
-  ':' +
-  process.env.RDS_PORT +
-  '/postgres?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+// If the PostgreSQL database is on localhost then the SSL string is not needed
+const sslString =
+  RDS_ENDPOINT !== 'localhost'
+    ? '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require'
+    : '';
 
-const RDS_INIT =
-  'postgres://' +
-  process.env.DATABASE_SCHEMA +
-  '_initiator:' +
-  process.env.DATABASE_INIT_PASSWORD +
-  '@' +
-  process.env.RDS_ENDPOINT +
-  ':' +
-  process.env.RDS_PORT +
-  '/' +
-  process.env.DATABASE_NAME +
-  '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+// Combines the PostgreSQL database endpoint and port
+const host = `${RDS_ENDPOINT}:${RDS_PORT}`;
 
-const POSTGRAPHILE =
-  'postgres://' +
-  process.env.DATABASE_SCHEMA +
-  '_postgraphile:' +
-  process.env.POSTGRAPHILE_PASSWORD +
-  '@' +
-  process.env.RDS_ENDPOINT +
-  ':' +
-  process.env.RDS_PORT +
-  '/' +
-  process.env.DATABASE_NAME +
-  '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require';
+// Combines the PostgreSQL database name with the SSL string for AWS RDS
+const database = `${DATABASE_NAME}${sslString}`;
+
+/**
+ * PostgreSQL connection strings
+ */
+
+const RDS_ROOT = `progres://${RDS_USER}:${RDS_PASSWORD}@${host}/postgres${sslString}`;
+
+const RDS_INIT_POSTGRES = `postgres://${DATABASE_SCHEMA}_initiator:${DATABASE_INIT_PASSWORD}@${host}/postgres${sslString}`;
+
+const RDS_INIT = `postgres://${DATABASE_SCHEMA}_initiator:${DATABASE_INIT_PASSWORD}@${host}/${database}`;
+
+const POSTGRAPHILE = `postgres://${DATABASE_SCHEMA}_postgraphile:${POSTGRAPHILE_PASSWORD}@${host}/${database}`;
 
 module.exports = { RDS_ROOT, RDS_INIT_POSTGRES, RDS_INIT, POSTGRAPHILE };
