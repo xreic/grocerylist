@@ -1,7 +1,8 @@
 # Grocery List v.PostGraphile + Next.js
 
-[Hosted on](http://52.53.239.91:8080/)
-[Demo at](https://youtu.be/2-OD3hyNpc8)
+Hosted on [AWS](http://52.53.239.91:8080/)
+
+Demo [here](https://youtu.be/2-OD3hyNpc8)
 
 Simple grocery list web app deployed on AWS RDS + EC2 deployment.
 
